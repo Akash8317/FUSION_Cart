@@ -1,24 +1,509 @@
-# Compiled class file
-*.class
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLIVcart — Believe Every Purchase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0a0f18;
+            --bg-surface: #101927;
+            --copper-primary: #d98236;
+            --copper-light: #e8a05c;
+            --copper-glow: rgba(217, 130, 54, 0.25);
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --radius-lg: 16px;
+        }
 
-# Log file
-*.log
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
 
-# BlueJ files
-*.ctxt
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+        /* Top Bar */
+        .top-banner {
+            background: linear-gradient(90deg, #111d2e, #1a2a42);
+            text-align: center;
+            padding: 10px;
+            font-size: 0.85rem;
+            color: var(--copper-light);
+            border-bottom: 1px solid var(--border-color);
+        }
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(14px);
+            background: rgba(10, 15, 24, 0.9);
+            border-bottom: 1px solid var(--border-color);
+        }
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #182a46 0%, #0d1624 100%);
+            border: 1px solid var(--copper-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .bliv-b {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .bliv-arrow {
+            position: absolute;
+            top: 3px;
+            right: 5px;
+            font-size: 0.9rem;
+            color: var(--copper-light);
+            font-weight: bold;
+        }
+
+        .brand-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-name span {
+            color: var(--copper-primary);
+        }
+
+        .brand-tag {
+            display: block;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .cart-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 99px;
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .cart-badge {
+            background: var(--copper-primary);
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.75rem;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: radial-gradient(circle at center, rgba(217, 130, 54, 0.12) 0%, transparent 70%);
+        }
+
+        .hero-chip {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 30px;
+            background: rgba(217, 130, 54, 0.15);
+            color: var(--copper-light);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(217, 130, 54, 0.3);
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+        }
+
+        .gradient-text {
+            color: var(--copper-light);
+        }
+
+        .hero-desc {
+            max-width: 580px;
+            margin: 0 auto 2rem;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* Product Grid */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(217, 130, 54, 0.4);
+        }
+
+        .card-media {
+            position: relative;
+            height: 240px;
+        }
+
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(15, 23, 42, 0.85);
+            font-size: 0.72rem;
+            padding: 4px 10px;
+            border-radius: 30px;
+            color: #fff;
+        }
+
+        .card-details {
+            padding: 1.2rem;
+        }
+
+        .category {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            color: var(--copper-light);
+            font-weight: 600;
+        }
+
+        .name {
+            font-size: 1.05rem;
+            margin: 6px 0 14px;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .add-to-cart {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .add-to-cart:hover {
+            background: var(--copper-primary);
+        }
+
+        /* Cart Drawer */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100%;
+            background: var(--bg-surface);
+            border-left: 1px solid var(--border-color);
+            z-index: 100;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .close-drawer {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .drawer-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem 0;
+        }
+
+        .drawer-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .subtotal-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: var(--copper-primary);
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            display: none;
+            z-index: 90;
+        }
+
+        .backdrop.open {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-banner">
+        ✦ Express Global Delivery • <strong>Believe Every Purchase</strong> ✦
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand-logo">
+                <div class="logo-mark">
+                    <span class="bliv-b">B</span>
+                    <span class="bliv-arrow">↗</span>
+                </div>
+                <div>
+                    <span class="brand-name">BLIV<span>cart</span></span>
+                    <span class="brand-tag">Believe Every Purchase</span>
+                </div>
+            </a>
+            <button class="cart-btn" onclick="toggleCart()">
+                <span>Cart</span>
+                <span class="cart-badge" id="cartCount">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-chip">BLIVcart Premium Store</div>
+        <h1 class="hero-title">Elevate Your Lifestyle.<br/><span class="gradient-text">Believe Every Purchase.</span></h1>
+        <p class="hero-desc">Authenticity guaranteed. Precision crafted premium products designed for everyday excellence.</p>
+    </section>
+
+    <section class="container">
+        <div class="section-head">
+            <h2>Curated Releases</h2>
+            <span style="color:var(--copper-light);">4 Items Available</span>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <!-- Side Cart Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="drawer-header">
+            <h3>Your BLIV Bag</h3>
+            <button class="close-drawer" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="drawer-items" id="cartList">
+            <p style="color: var(--text-muted);">Your bag is currently empty.</p>
+        </div>
+        <div class="drawer-footer">
+            <div class="subtotal-row">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn-primary" onclick="checkout()">Proceed to Checkout →</button>
+        </div>
+    </div>
+    <div class="backdrop" id="backdrop" onclick="toggleCart()"></div>
+
+    <footer>
+        <p>&copy; 2026 BLIVcart. Believe Every Purchase. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: "BLIV Chrono Aero Gold Watch", category: "Luxury Watches", price: 349.00, badge: "Trending", image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&auto=format&fit=crop&q=80" },
+            { id: 2, name: "BLIV Sonic Signature Headset", category: "Audio Gear", price: 289.00, badge: "Best Seller", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80" },
+            { id: 3, name: "AeroFlight Matte Navy Bag", category: "Travel", price: 199.00, badge: "Exclusive", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format&fit=crop&q=80" },
+            { id: 4, name: "BLIV Pure Minimalist Sneakers", category: "Footwear", price: 220.00, badge: "New Arrival", image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&auto=format&fit=crop&q=80" }
+        ];
+
+        let cart = [];
+
+        // Render product cards
+        const grid = document.getElementById("productGrid");
+        grid.innerHTML = products.map(item => `
+            <article class="card">
+                <div class="card-media">
+                    <span class="badge">${item.badge}</span>
+                    <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="card-details">
+                    <span class="category">${item.category}</span>
+                    <h3 class="name">${item.name}</h3>
+                    <div class="card-bottom">
+                        <span class="price">$${item.price.toFixed(2)}</span>
+                        <button class="add-to-cart" onclick="addToCart('${item.name}', ${item.price})">+ Add to Bag</button>
+                    </div>
+                </div>
+            </article>
+        `).join("");
+
+        function toggleCart() {
+            document.getElementById("cartDrawer").classList.toggle("open");
+            document.getElementById("backdrop").classList.toggle("open");
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+            const drawer = document.getElementById("cartDrawer");
+            if (!drawer.classList.contains("open")) toggleCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function updateCart() {
+            document.getElementById("cartCount").textContent = cart.length;
+            const list = document.getElementById("cartList");
+            const total = document.getElementById("cartTotal");
+
+            if (cart.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-muted);">Your bag is currently empty.</p>';
+                total.textContent = "$0.00";
+                return;
+            }
+
+            let sum = 0;
+            list.innerHTML = cart.map((item, idx) => {
+                sum += item.price;
+                return `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:8px;">
+                        <div>
+                            <div style="font-weight:600; font-size:0.9rem;">${item.name}</div>
+                            <small style="color:var(--copper-light);">$${item.price.toFixed(2)}</small>
+                        </div>
+                        <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:1rem;">✕</button>
+                    </div>
+                `;
+            }).join("");
+
+            total.textContent = `$${sum.toFixed(2)}`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            alert("✨ BLIVcart Order Confirmed! Believe Every Purchase.");
+        }
+    </script>
+</body>
+</html>
+
